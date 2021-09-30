@@ -1,0 +1,29 @@
+PODS:
+  - BRLMPrinterKit (4.0.2.1)
+  - brother_printer (0.0.1):
+    - BRLMPrinterKit
+    - Flutter
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - brother_printer (from `.symlinks/plugins/brother_printer/ios`)
+  - Flutter (from `Flutter`)
+
+SPEC REPOS:
+  trunk:
+    - BRLMPrinterKit
+
+EXTERNAL SOURCES:
+  brother_printer:
+    :path: ".symlinks/plugins/brother_printer/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  BRLMPrinterKit: 79ca593275bdae5309c8ee93674df2e5177a1b52
+  brother_printer: e4c1b6e5a27e9cea373e6b0a81a5b35f74c86712
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+
+PODFILE CHECKSUM: a5ead389ae8478b2f010fbadad4f103eae9ff09f
+
+COCOAPODS: 1.10.1

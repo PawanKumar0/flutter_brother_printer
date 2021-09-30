@@ -1,12 +1,5 @@
-//
-//  BrotherPrinterPlugin.h
-//  Pods
-//
-//  Created by Pawan Dev on 27/09/21.
-//
+#import <Flutter/Flutter.h>
+@class BRPtouchPrinter;
 
-#ifndef BrotherPrinterPlugin_h
-#define BrotherPrinterPlugin_h
-
-
-#endif /* BrotherPrinterPlugin_h */
+@interface BrotherPrinterPlugin : NSObject<FlutterPlugin>
+@end

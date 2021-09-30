@@ -215,14 +215,15 @@ public class PrinterSession {
                     if (printer.startCommunication()) {
                         Log.d("BrotherPrinterPlugin", "Communication started");
 
-                        int pages = printer.getPDFFilePages(path);
-                        for (int page = 1; page <= pages; page++) {
-                            PrinterStatus result = printer.printPdfFile(path, page);
-                            if (result.errorCode != PrinterInfo.ErrorCode.ERROR_NONE) {
-                                errorCode = result.errorCode;
-                                Log.d("BrotherPrinterPlugin", "ERROR - " + errorCode.toString());
-                            }
-                        }
+                        // int pages = printer.getPDFFilePages(path);
+                        // for (int page = 1; page <= pages; page++) {
+                        //     PrinterStatus result = printer.printPdfFile(path, page);
+                        //     if (result.errorCode != PrinterInfo.ErrorCode.ERROR_NONE) {
+                        //         errorCode = result.errorCode;
+                        //         Log.d("BrotherPrinterPlugin", "ERROR - " + errorCode.toString());
+                        //     }
+                        // }
+                        PrinterStatus result = printer.printFile(path);
                         printer.endCommunication();
 
                         if (errorCode != null) {

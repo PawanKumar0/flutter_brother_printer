@@ -3,7 +3,7 @@
 
 #import <Foundation/Foundation.h>
 
-FOUNDATION_EXPORT NSString *const BRErrorDomain;
+//FOUNDATION_EXPORT NSString *const BRErrorDomain;
 
 enum {
     BRFailedToStartDiscoveryError = 1,

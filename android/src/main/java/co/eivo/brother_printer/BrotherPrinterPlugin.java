@@ -58,7 +58,10 @@ public class BrotherPrinterPlugin implements FlutterPlugin, MethodCallHandler, A
       searchDevices(call, result);
     }
     else if (call.method.equals("printPDF")) {
-      printPDF(call, result);
+      // print(call, result);
+    }
+    else if (call.method.equals("printImage")) {
+      print(call, result);
     }
     else {
       result.notImplemented();
@@ -96,7 +99,7 @@ public class BrotherPrinterPlugin implements FlutterPlugin, MethodCallHandler, A
     });
   }
 
-  public void printPDF(@NonNull MethodCall call, @NonNull final Result result) {
+  public void print(@NonNull MethodCall call, @NonNull final Result result) {
     String path = call.argument("path");
     int copies = call.argument("copies");
     int modelCode = call.argument("modelCode");

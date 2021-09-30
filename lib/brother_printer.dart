@@ -35,12 +35,48 @@ class BrotherPrinter {
       'printerNames': printerNames,
     });
 
-    final devices = rawDevices.map((x) => Map<String, String?>.from(x)).map((x) => BrotherDevice.fromJson(x)).whereType<BrotherDevice>().toList();
+    final devices = rawDevices
+        .map((x) => Map<String, String?>.from(x))
+        .map((x) => BrotherDevice.fromJson(x))
+        .whereType<BrotherDevice>()
+        .toList();
 
     return devices.toSet().toList();
   }
 
-  static Future<void> printPDF({
+  // static Future<void> printPDF({
+  //   required String path,
+  //   required BrotherDevice device,
+  //   String? paperSettingsPath,
+  //   BrotherLabelSize? labelSize,
+  //   int copies = 1,
+  // }) async {
+  //   assert(copies > 0);
+
+  //   int modelCode;
+
+  //   if (Platform.isIOS) {
+  //     modelCode = device.model.codeIOS;
+  //   } else if (Platform.isAndroid) {
+  //     modelCode = device.model.codeAndroid;
+  //   } else {
+  //     throw UnimplementedError();
+  //   }
+
+  //   await _channel.invokeMethod('printPDF', {
+  //     'path': path,
+  //     'copies': copies,
+  //     'modelCode': modelCode,
+  //     'ipAddress': device.ipAddress,
+  //     'macAddress': device.macAddress,
+  //     'serialNumber': device.serialNumber,
+  //     'bleAdvertiseLocalName': device.bleAdvertiseLocalName,
+  //     'paperSettingsPath': paperSettingsPath,
+  //     'labelSize': labelSize?.toParam(),
+  //   });
+  // }
+
+  static Future<void> printImage({
     required String path,
     required BrotherDevice device,
     String? paperSettingsPath,
@@ -59,7 +95,7 @@ class BrotherPrinter {
       throw UnimplementedError();
     }
 
-    await _channel.invokeMethod('printPDF', {
+    await _channel.invokeMethod('printImage', {
       'path': path,
       'copies': copies,
       'modelCode': modelCode,

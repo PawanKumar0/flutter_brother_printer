@@ -13,24 +13,32 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  String? _platformVersion = 'Unknown';
+class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  List<BrotherDevice> _platformVersion = [];
+  late Animation<double> _myAnimation;
+  late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+    );
+
+    _myAnimation = CurvedAnimation(curve: Curves.linear, parent: _controller);
+    searchDevices();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String? platformVersion;
+  Future<void> searchDevices() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
+    _controller.forward();
     try {
-      // platformVersion = await BrotherPrinter.platformVersion ?? 'Unknown platform version';
+      _platformVersion = await BrotherPrinter.searchDevices();
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      _platformVersion = [];
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -38,9 +46,8 @@ class _MyAppState extends State<MyApp> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+    setState(() {});
+    _controller.reverse();
   }
 
   @override
@@ -49,9 +56,23 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Plugin example app'),
+          actions: [
+            IconButton(
+                onPressed: searchDevices,
+                icon: AnimatedIcon(
+                  icon: AnimatedIcons.search_ellipsis,
+                  progress: _myAnimation,
+                ))
+          ],
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: SingleChildScrollView(
+          child: Column(
+              children: _platformVersion
+                  .map((e) => ListTile(
+                        title: Text(e.model.nameAndroid),
+                        subtitle: Text(e.macAddress ?? ''),
+                      ))
+                  .toList()),
         ),
       ),
     );
