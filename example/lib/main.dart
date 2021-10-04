@@ -71,10 +71,16 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   .map((e) => ListTile(
                         title: Text(e.model.nameAndroid),
                         subtitle: Text(e.macAddress ?? ''),
+                        onTap: () => print(e),
                       ))
                   .toList()),
         ),
       ),
     );
+  }
+
+  void print(BrotherDevice device) async {
+    BrotherPrinter.printImage(
+        path: 'path', device: device, labelSize: BrotherLabelSize.RollW62);
   }
 }
